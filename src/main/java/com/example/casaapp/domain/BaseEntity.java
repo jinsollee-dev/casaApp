@@ -1,5 +1,6 @@
 package com.example.casaapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
@@ -17,10 +18,12 @@ public abstract class BaseEntity {
 
     @CreatedDate
     @Column(name = "reg_date", updatable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime regDate;
 
     @LastModifiedDate
     @Column(name="mod_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime modDate;
 
 }

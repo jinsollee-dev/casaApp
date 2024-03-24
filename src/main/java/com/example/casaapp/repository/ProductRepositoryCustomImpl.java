@@ -8,6 +8,7 @@ import com.querydsl.core.QueryResults;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import org.thymeleaf.util.StringUtils;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Log4j2
 public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 
     private JPAQueryFactory queryFactory;
@@ -57,6 +59,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 
     @Override
     public Page<Product> getAdminProductPage(ProductSearchDTO productSearchDTO, Pageable pageable) {
+        log.info(productSearchDTO.toString());
         QueryResults<Product> results = queryFactory
                 .selectFrom(QProduct.product)
                 .where(regDtsAfter(productSearchDTO.getSearchDateType()),

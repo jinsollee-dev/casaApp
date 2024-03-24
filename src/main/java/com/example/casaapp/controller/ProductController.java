@@ -112,7 +112,8 @@ public class ProductController {
 
     @GetMapping(value = {"/admin/products/", "/admin/products/{page}"})
     public ResponsePageDTO productManage(ProductSearchDTO productSearchDTO, @PathVariable("page") Optional<Integer> page) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 3);
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 1);
+        log.info(productSearchDTO.toString());
         Page<Product> products = productService.getAdminProductPage(productSearchDTO, pageable);
         ResponsePageDTO responsePageDTO = ResponsePageDTO.builder()
                 .productPage(products)
